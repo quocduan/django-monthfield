@@ -50,7 +50,7 @@ class MonthField(models.DateField):
         return self.to_python(value)
 
     def formfield(self, **kwargs):
-        # The widget is allready being specified somewhere by models.DateField...
+        # The widget is already being specified somewhere by models.DateField...
         kwargs['widget'] = self.widget
         defaults = {
             'form_class': forms.MonthField
