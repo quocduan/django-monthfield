@@ -2,6 +2,11 @@ import datetime
 
 from month.util import string_type
 
+__version__ = '1.0.0'
+__title__ = 'django-monthfield'
+# Version synonym
+VERSION = __version__
+
 
 def days(days):
     return datetime.timedelta(days=days)
