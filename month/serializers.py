@@ -11,7 +11,7 @@ class MonthField(fields.DateField):
         month: Month = None
         if isinstance(value, Month):
             month = value
-        elif isinstance(value, datetime.datetime):
+        elif isinstance(value, datetime.date):
             month = Month.from_date(value)
             if len(str(month.year)) < 4:
                 raise serializers.ValidationError(
@@ -19,8 +19,11 @@ class MonthField(fields.DateField):
                     code='invalid_year',
                     # params={'value': value},
                 )
+        elif isinstance(value, str):
+            month = Month.from_string(value)
         else:
             month = None
+
         return month
 
     def to_representation(self, value):
