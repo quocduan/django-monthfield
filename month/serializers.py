@@ -8,9 +8,10 @@ from month import Month, models
 class MonthField(fields.DateField):
 
     def to_internal_value(self, value):
+        month: Month = None
         if isinstance(value, Month):
             month = value
-        elif isinstance(value, datetime.date):
+        elif isinstance(value, datetime.datetime):
             month = Month.from_date(value)
             if len(str(month.year)) < 4:
                 raise serializers.ValidationError(
@@ -18,6 +19,9 @@ class MonthField(fields.DateField):
                     code='invalid_year',
                     # params={'value': value},
                 )
+        else:
+            month = None
+        return month
 
     def to_representation(self, value):
         if not value:
