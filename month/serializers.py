@@ -1,6 +1,7 @@
 import datetime
 
 from rest_framework import fields, serializers, ISO_8601
+from rest_framework.exceptions import ValidationError
 from rest_framework.settings import api_settings
 from month import Month, models
 
@@ -20,7 +21,10 @@ class MonthField(fields.DateField):
                     # params={'value': value},
                 )
         elif isinstance(value, str):
-            month = Month.from_string(value)
+            try:
+                month = Month.from_string(value)
+            except:
+                raise ValidationError("Cannot parse the given month string")
         else:
             month = None
 

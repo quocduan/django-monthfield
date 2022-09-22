@@ -2,7 +2,7 @@ import datetime
 
 from month.util import string_type
 
-__version__ = '1.0.2'
+__version__ = '1.0.3'
 __title__ = 'django-monthfield'
 # Version synonym
 VERSION = __version__
